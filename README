@@ -1,9 +1,17 @@
-This is intended to hold my image slide utilities
-for my photo web site.
+This is intended to hold my image slide (islide) utilities for my photo web site.
 
-The plan is to use this as a learning exercise
-for jQuery, jsmock, and JSUnit.
+I saw this (http://opiefoto.com/articles/photoslider) slider tutorial from
+Jesse Janzer, and I liked the output but was not happy about how it 
+fit into my project.
 
-Nothing to see here for now ;(
+I'm reusing the layout and transition types from Jesse Janzer slider tutorial.
+  For his original tutorial please look here: http://opiefoto.com/articles/photoslider
+  To contact him and see what he is up to look here: jjanzer@lanthera.net http://jjanzer.subculture.org
+
+'islide' is my attempt to implement something similar using jQuery, and Functional
+
+
+My secondary plan is to use this as a learning exercise
+for jQuery, JSmock, and JsUnit.
 
 Eric
