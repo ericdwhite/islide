@@ -1,0 +1,14 @@
+Feature: Display central image corresponding to thumbnail
+  In order to enlarge a thumbnail image
+  Casual Users should be able to select a thumbnail to
+  have it enlarged.
+
+  Scenario: First time viewing a slide deck
+    Given there are some thumbnails in the slide deck
+    When the users opens the slide deck
+    Then the first slide in the slide deck should be enlarged
+
+  Scenario: Casual User selects a thumbnail
+    Given there are some thumbnails in the slide deck
+    When the user selects a different thumbnail in the slide deck
+    Then the enlarged image should change to match the thumbnail
