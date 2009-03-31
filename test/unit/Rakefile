@@ -1,0 +1,15 @@
+
+UNIT_TESTS=['thumbnail.html']
+TEST_RUNNER="http://localhost:3000/test/javascripts/jsunit/testRunner.html"
+
+BROWSER_CMD="open"
+
+task :default do
+  UNIT_TESTS.each do |test|
+    puts "Starting #{test}"
+    cmd = "#{BROWSER_CMD} \"#{TEST_RUNNER}?target=test&autoRun=true&testpage=./../../unit/#{test}\""
+    puts cmd
+    sh cmd
+  end
+end
+

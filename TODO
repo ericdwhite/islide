@@ -1,0 +1,79 @@
+Getting the testing libraries:
+------------------------------------------------------
+JSMock -- http://jsmock.sourceforge.net/
+"JSMock is a fully featured Mock Object library for JavaScript that provides the necessary tools to do effective interactive based testing"
+
+I'm going to use jsmock 1.2.2.
+
+
+JsUnit -- http://www.jsunit.net/
+"JsUnit is a Unit Testing framework for client-side (in-browser) JavaScript. It is essentially a port of JUnit to JavaScript."
+
+I'm going to use jsunit 2.2alpha
+
+
+Functional -- http://osteele.com/sources/javascript/functional/
+"Functional is a library for functional programming in JavaScript."
+
+I'm going to use functional 1.0.2 for the helpful 'bind' function.
+
+
+Overview of TDD with JavaScript
+------------------------------------------------------
+http://www.infoq.com/articles/javascript-tdd
+
+I was this article that got me thinking I should
+reimplement by image slider with test cases.
+
+
+Making JSUnit Work on Firefox 3.x
+------------------------------------------------------
+http://digitalmihailo.blogspot.com/2008/06/make-jsunit-work-in-firefox-30.html
+
+This killed me until I found this article.  Basically I was getting the
+error: 'Permission denied to set property Window.isTestPageLoaded'.
+
+Add a patch: http://sourceforge.net/tracker/index.php?func=detail&aid=2230999&group_id=28041&atid=391976
+
+And set 'security.fileuri.strict_origin_policy' to false by editing in the Firefox config.  To
+reach the firefox config put the following in the address bar:  'about:config'
+
+
+I also change the getStackTrace as my tests where always getting halted by
+firebug complaing about 'foo.bar'.  Because of how getStackTrace was implemented.
+
+I changed the following:
+
+from
+-------------------------------------
+function getStackTrace() {
+...
+    else { // Mozilla, not ECMA
+        // fake an exception so we can get Mozilla's error stack
+        var testExcp;
+        try
+        {
+            foo.bar
+        }
+        catch(testExcp)
+        {
+...
+
+to
+-------------------------------------
+function getStackTrace() {
+...
+    else { // Mozilla, not ECMA
+        // fake an exception so we can get Mozilla's error stack
+        var testExcp;
+        try
+        {
+	    // ericdwhite changed this to avoid
+            // firebug from always halting.
+	    var stackException = new Error("The Stack");
+            throw stackException;
+        }
+        catch(testExcp)
+        {
+...
+
