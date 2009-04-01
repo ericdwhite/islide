@@ -1,12 +1,11 @@
 This is intended to hold my image slide (islide) utilities for my photo web site.
 
-I saw this (http://opiefoto.com/articles/photoslider) slider tutorial from
-Jesse Janzer, and I liked the output but was not happy about how it 
-fit into my project.
+I saw this (http://opiefoto.com/articles/photoslider) slider tutorial from Jesse Janzer, and I liked the output but was not happy about how it fit into my project.
 
-I'm reusing the layout and transition types from Jesse Janzer slider tutorial.
-  For his original tutorial please look here: http://opiefoto.com/articles/photoslider
-  To contact him and see what he is up to look here: jjanzer@lanthera.net http://jjanzer.subculture.org
+I'm reusing the layout and transition types from Jesse Janzer slider tutorial.  For his original tutorial please look here:
+  * http://opiefoto.com/articles/photoslider
+
+To contact him and see what he is up to look here: jjanzer@lanthera.net http://jjanzer.subculture.org
 
 'islide' is my attempt to implement something similar using jQuery, and Functional
 
@@ -14,4 +13,15 @@ I'm reusing the layout and transition types from Jesse Janzer slider tutorial.
 My secondary plan is to use this as a learning exercise
 for jQuery, JSmock, and JsUnit.
 
+
 Eric
+
+
+Running Test Cases:
+---------------------------
+The test cases can be run using JsUnit and the Rakefile in each test folder.  For example 'test/unit/Rakefile'.
+
+Currently the test expect that browser will be launched on OSX using the 'open' command.
+
+
+
