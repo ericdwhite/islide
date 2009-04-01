@@ -26,3 +26,46 @@
  * Please see the islide/README for additional credits and information.
  */
 
+function debug(msg){
+  //alert(msg);
+}
+
+function Image(original, slide, thumbnail) {
+  this.originalURL = original;
+  this.slideURL = slide;
+  this.thumbnailURL = thumbnail;
+}
+
+function Album() {
+  this.currentImage = null;
+  this.images = [];
+}
+
+Album.prototype.addImage = function(original, slide, thumbnail) {
+  this.images.push(new Image(original, slide, thumbnail));
+};
+
+Album.prototype.nextImage = function() {
+  debug("Images in array: " + this.images.length);
+
+  if( this.images.length==0 ){
+    return null;
+  }
+
+  if( this.currentImage==null ){
+    this.currentImage = 0;
+  }
+  else {
+    this.currentImage = this.currentImage + 1;
+  }
+
+  /* Ensure we are not past the image array */
+  if( this.currentImage>=this.images.length ){
+    return null;
+  }
+
+  return this.images[this.currentImage];
+};
+
+
+
