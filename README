@@ -19,9 +19,22 @@ Eric
 
 Running Test Cases:
 ---------------------------
+1. Starting Rack
+  a) Navigate to the top level project folder (it should contain the file rstatic.rb)
+  b) $ thin -R rstatic.rb start
+  b) $ open http://localhost:3000
+
+This will lauch the thin server configure to serve static content, namely the application
+and static content.
+
+See: http://blog.ericwhite.ca/articles/2009/03/serving-static-content-with-ruby-thinrack/
+
+
+2. Launching Rake
+  a) Navigate to the folder of the tests to run (e.g. test/unit).
+  b) $ rake
+
 The test cases can be run using JsUnit and the Rakefile in each test folder.  For example 'test/unit/Rakefile'.
+Currently the tests expect that browser will be launched on OSX using the 'open' command.
 
-Currently the test expect that browser will be launched on OSX using the 'open' command.
-
-
-
+See: test/test_helper.rb

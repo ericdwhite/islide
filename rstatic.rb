@@ -1,32 +1,36 @@
-# Use thin+rack to server of the content for
+# Use thin+rack to serve the content for
 # testing with JsUnit
 #
 # To Start:
-# $ thin -R static.ru start
+# $ thin -R rstatic.rb start
 #
 # To Browse:
 # $ open http://localhost:3000
 #
 
-# Static content is rooted in the current working directory
+# Static content is rooted in the current working directory.
+#   With some paths available for caching by the browser.
+#   See: ALLOWED_FOR_CACHING
 #
 root=Dir.pwd
 puts ">>> Serving: #{root}"
 
-
-RELOAD_SECONDS=1
-ALLOWED_FOR_CACHING=/test\/javascripts/
-
-# thin/controllers/controller.rb:load_rackup_config
+#
+# A list of regular expressions which if
+# matched will be cached by the browser.
+#
+ALLOWED_FOR_CACHING=[/test\/javascripts/]
 
 class NonCachingFile < Rack::File
   def serving
     response = super
-    return response if @path =~ ALLOWED_FOR_CACHING
+    ALLOWED_FOR_CACHING.each do |re|
+      return response if @path =~ re
+    end
 
     #
-    # Don't cache included files for
-    # our website neither in the unit, or
+    # Don't cache included files from
+    # our website neither in the unit test, or
     # functional tests or in the application
     # itself.
     http_headers = response[1]
@@ -40,10 +44,14 @@ app = Rack::Builder.new {
   use Rack::CommonLogger
   run Rack::Directory.new("#{root}", NonCachingFile.new("#{root}"))
 }
-#Rack::Reloader.new(app, RELOAD_SECONDS)
 
 # Return the app with the same name as this
 # rackup configuration file.
+#
+#   For implementation details see and while the name must
+#   match the name of the ruby file see:
+#
+#     thin/controllers/controller.rb:load_rackup_config
 Rstatic = app
 
 #
