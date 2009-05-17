@@ -1,5 +1,5 @@
 /**
-* islide - image slider
+* islide - Image Slider
 *
 * Copyright (c) 2009 Eric D. White
 *
@@ -23,19 +23,37 @@
 */
 
 /**
- * Please see the islide/README for additional credits and information.
+ * Please see the top level README for additional credits and information.
  */
 
 function debug(msg){
   //alert(msg);
 }
 
+function info(msg){
+  //alert(msg);
+}
+
+function error(msg){
+  //alert(msg);
+}
+
+
+/*
+ * An image normally containted within
+ * an Album
+ *
+ * see: Album.addImage
+ */
 function Image(original, slide, thumbnail) {
   this.originalURL = original;
   this.slideURL = slide;
   this.thumbnailURL = thumbnail;
 }
 
+/*
+ * Album or group of images
+ */
 function Album() {
   this.currentImage = null;
   this.images = [];
@@ -56,12 +74,13 @@ Album.prototype.nextImage = function() {
     this.currentImage = 0;
   }
   else {
-    this.currentImage = this.currentImage + 1;
-  }
-
-  /* Ensure we are not past the image array */
-  if( this.currentImage>=this.images.length ){
-    return null;
+    /* Ensure we are not past the image array */
+    if( this.currentImage + 1 >= this.images.length ){
+      return null;
+    }
+    else {
+      this.currentImage = this.currentImage + 1;
+    }
   }
 
   return this.images[this.currentImage];
