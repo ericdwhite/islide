@@ -7,8 +7,13 @@
 require "#{File.join(File.dirname(__FILE__), "..", "test_helper.rb")}"
 
 # The lists of tests to run from the current directory.
+#
+# Note: setupTest.html can be used to ensure that
+#       the environment is setup correctly.
+#
 UNIT_TESTS=['thumbnail.html']
 
+# Used to create relative URLS.
 UNIT_TESTBASE = File.join(".", "..", "..", "unit")
 
 task :default do
