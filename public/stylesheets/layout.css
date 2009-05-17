@@ -1,0 +1,156 @@
+/*
+----- BEGIN islide LICENSE BLOCK -----
+islide - Image Slider
+
+Copyright (c) 2009 Eric D. White
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+----- END islide LICENSE BLOCK   -----
+*/
+
+/*
+  This CSS file contains the fonts, layouts, etc
+  for the portions of the page that don't directly
+  have to do with islide.
+*/
+
+
+html {
+    font-size: 62.5%;
+    font-family: Georgia, serf;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Verdana", sans-serif;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.3em;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-size: 1.0em;
+}
+
+h4 {
+  font-size: 0.7em;
+}
+
+a {
+    color: #333;
+}
+
+a:visited {
+    color: #999;
+}
+
+div#copyright {
+    border-bottom: 1px solid #999;
+}
+
+/*
+  The following elements control the 
+  flow of the DIV elements on the page.
+*/
+#clearfloat {
+    clear: both;
+}
+
+#container {
+    margin: 0px auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}
+
+/*
+  The Perfect 3 Column Liquid Layout (Percentage widths)
+    http://matthewjamestaylor.com/blog/perfect-3-column.htm
+*/
+
+/* column container */
+.colmask {
+    position:relative; /* This fixes the IE7 overflow hidden bug */
+    clear:both;
+    float:left;
+    width:100%;        /* width of whole page */
+    overflow:hidden;   /* This chops off any overhanging divs */
+}
+
+/* common column settings */
+.colright, .colmid, .colleft {
+    float:left;
+    width:100%;        /* width of page */
+    position:relative;
+}
+
+.col1, .col2, .col3 {
+    float:left;
+    position:relative;
+    padding:0 0 0 0; /* no left and right padding on columns, we just make
+			them narrower instead only padding top and bottom
+			is included here, make it whatever value you need */
+    overflow:hidden;
+}
+
+/* 3 Column settings */
+.threecol {
+    background: #fff;    /* right column background */
+}
+
+.threecol .colmid {
+    right: 20%;          /* width of the right column */
+    background: #fff;
+}
+.threecol .colleft {
+    right: 60%;          /* width of the middle column */
+    background: #fff;    /* left column background colour */
+}
+.threecol .col1 {
+    width: 60%;          /* width of center column content (column width minus padding on either side) */
+    left: 100%;          /* 100% plus left padding of center column */
+}
+.threecol .col2 {
+    width: 20%;          /* Width of left column content (column width minus padding on either side) */
+    left: 20%;           /* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+.threecol .col3 {
+    width: 20%;          /* Width of right column content (column width minus padding on either side) */
+    left: 80%;           /* Please make note of the brackets here:
+			   (100% - left column width) + (center column left and right padding) +
+			   (left column left and right padding) + (right column left padding) */
+}
+
+/* Footer styles */
+#footer {
+    clear:both;
+    float:left;
+    width:100%;
+    border-top:1px solid #000;
+}
+
+#footer a {
+  font-size: 0.7em;
+}

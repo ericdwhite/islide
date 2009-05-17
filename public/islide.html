@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+  <head>
+    <title>iSlide - demo</title>
+    <link rel="stylesheet" href="stylesheets/islide.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="javascript/islide.js">
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+	<div id="copyright"><h4 id="copyright">Copyright Eric D. White {See: LICENSE}</h4></div>
+        <h1 id="is-group-title">Loading... 2008/limone-skiing</h1>
+      </div>
+
+      <!--
+	 The Perfect 3 Column Liquid Layout (Percentage widths)
+	 http://matthewjamestaylor.com/blog/perfect-3-column.htm
+	-->
+      <div class="colmask threecol">
+	<div class="colmid">
+	  <div class="colleft">
+	    <div class="col1">
+	      <!--
+		 Center COLUMN
+		 -->
+	      <div id="is-main">
+		<!-- 
+		   Just an image to display while the real
+		   photo data is being retrieved.
+
+		   Source:  http://www.flickr.com/photos/lwr/88507755/
+		  -->
+		<img src="images/please-wait.jpg" width="720" height="500"/>
+	      </div>
+
+	      <div id="is-thumbbar">
+		<h3>Loading thumbbar...</h3>
+		<!-- Holds the thumbnails -->
+	      </div>
+	    </div>
+
+	    <div class="col2">
+	      <!--
+		 Left COLUMN
+		 -->
+	      <div id="is-add-tag">
+		<h2>Add a tag:</h2>
+		<form method="POST" id="tag_form" action="new_tag">
+		  <p><input type="text" name="tag" value="" /></p>
+		  <p><input type="submit" name="save_tag" value="Tag" />
+		</form>
+	      </div>
+	    </div>
+
+	    <div class="col3">
+	      <!--
+		 Right COLUMN
+		 -->
+	      <div id="is-tags">
+		<h2>Tags:</h2>
+		<p class="is-tags">loading... {limone, skiing, winter } tree, nature</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div id="footer">
+	<a href="http://github.com/ericdwhite/islide/tree/master">iSlide on github</a>
+      </div>
+  </body>
+</html>
