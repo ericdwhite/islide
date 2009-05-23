@@ -30,6 +30,9 @@ var SLIDE_IMAGE_1 = "slide/IMG1.jpg";
 var ORIGINAL_IMAGE_1 = "original/IMG1.jpg";
 var THUMBNAIL_IMAGE_1 = "thumbnail/IMG1.jpg";
 
+/*
+ * Factory methods
+ */
 function createAlbumWithOneImage() {
   var album = new Album();
   album.addImage(ORIGINAL_IMAGE_1, SLIDE_IMAGE_1, THUMBNAIL_IMAGE_1);
@@ -40,7 +43,7 @@ function createAlbumWithOneImage() {
 /*
  * Album Tests
  */
-function testGetSlideAImageForThumbnail() {
+function testGetAnImageFromAnAlbum() {
   var album = createAlbumWithOneImage();
 
   var image = album.nextImage();
@@ -50,7 +53,7 @@ function testGetSlideAImageForThumbnail() {
   assertEquals(THUMBNAIL_IMAGE_1, image.thumbnailURL);
 }
 
-function testGetSlideAImageForThumbnailInEmptyAlbum() {
+function testGetNextSlideImageInEmptyAlbum() {
   var album = new Album();
   var image = album.nextImage();
   assertEquals(null, image);
@@ -62,5 +65,27 @@ function testMovePastTheLastImage() {
   assertNotNull(image1);
 
   var image2 = album.nextImage();
+  assertNull(image2);
+}
+
+function testPreviousImage() {
+  var album = createAlbumWithOneImage();
+  var image1 = album.nextImage();
+  assertNotNull(image1);
+
+  var image2 = album.nextImage();
+  assertNull(image2);
+
+  var image3 = album.previousImage();
+  assertEquals(image1, image3);
+  assertEquals(image1.slideURL, image3.slideURL);
+}
+
+function testMoveBeforeTheFirstImage() {
+  var album = createAlbumWithOneImage();
+  var image1 = album.nextImage();
+  assertNotNull(image1);
+
+  var image2 = album.previousImage();
   assertNull(image2);
 }

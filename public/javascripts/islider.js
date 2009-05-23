@@ -26,6 +26,10 @@
  * Please see the top level README for additional credits and information.
  */
 
+function trace(msg){
+  //alert(msg);
+}
+
 function debug(msg){
   //alert(msg);
 }
@@ -55,7 +59,8 @@ function Image(original, slide, thumbnail) {
  * Album or group of images
  */
 function Album() {
-  this.currentImage = null;
+  this.START = -1;
+  this.currentImage = this.START;
   this.images = [];
 }
 
@@ -64,27 +69,38 @@ Album.prototype.addImage = function(original, slide, thumbnail) {
 };
 
 Album.prototype.nextImage = function() {
-  debug("Images in array: " + this.images.length);
+  debug("Images in array: " + this.images.length +
+    " current image:" + this.currentImage);
 
   if( this.images.length==0 ){
     return null;
   }
 
-  if( this.currentImage==null ){
-    this.currentImage = 0;
-  }
-  else {
-    /* Ensure we are not past the image array */
-    if( this.currentImage + 1 >= this.images.length ){
-      return null;
-    }
-    else {
-      this.currentImage = this.currentImage + 1;
-    }
+  this.currentImage = this.currentImage + 1;
+  if( this.currentImage >= this.images.length ){
+    trace("Returning image:" + "null");
+    return null;
   }
 
+  trace("Returning image:" + this.currentImage);
   return this.images[this.currentImage];
 };
 
+Album.prototype.previousImage = function() {
+  debug("Images in array: " + this.images.length +
+    " current image:" + this.currentImage);
 
+  if( this.images.length==0 ){
+    return null;
+  }
+
+  this.currentImage = this.currentImage - 1;
+  if( this.currentImage <= this.START ){
+    trace("Returning image:" + "null");
+    return null;
+  }
+
+  trace("Returning image:" + this.currentImage);
+  return this.images[this.currentImage];
+};
 
