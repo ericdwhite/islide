@@ -51,3 +51,63 @@ function testSpoolingLogger() {
 //  var l = new Log('testAlertLogger', BrowserAlert.console());
 // l.trace("Hello World.");
 //}
+
+/*
+ * Test Utilities
+ */
+function compareArray(expected, actual) {
+  if(expected==null & actual==null ) {
+    return;
+  }
+  assertNotNull(expected);
+  assertNotNull(actual);
+  assertEquals(expected.length, actual.length);
+  for(var i=0; i<expected.length; i++) {
+    assertEquals(expected[i], actual[i]);
+  }
+}
+
+/*
+ * Map Tests
+ */
+function testEmptyMap() {
+  var m = new ISlide.Map();
+  assertNull(m.get("Does not exist."));
+}
+
+function testPutMap() {
+  var m = new ISlide.Map();
+  m.put("One", 1);
+  assertEquals(1, m.get("One"));
+  assertNull(m.get("Two"));
+}
+
+function testEmptyKeysMap() {
+  var m = new ISlide.Map();
+  compareArray([], m.keys());
+}
+
+function testKeysMap() {
+  var m = new ISlide.Map();
+  m.put("Two", 2);
+  m.put("One", 1);
+  var keys = m.keys().sort();
+  var expected = ["One", "Two"];
+  compareArray(expected, keys);
+}
+
+function testEmptyValuesMap() {
+  var m = new ISlide.Map();
+  compareArray([], m.values());
+}
+
+function testValuesMap() {
+  var m = new ISlide.Map();
+  m.put("Two", 2);
+  m.put("One", 1);
+  var values = m.values().sort();
+  var expected = [1, 2];
+  compareArray(expected, values);
+}
+
+

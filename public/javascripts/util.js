@@ -121,3 +121,65 @@ BrowserAlert.console = function() {
     alert(msg);
   };
 };
+
+
+var ISlide = {}; // Namespace
+
+//
+// Simple Map
+//   Better versions can be found here:
+//   http://stackoverflow.com/questions/368280/javascript-hashmap-equivalent
+//   This is basically pottedmeat's solution (They get all the credit).
+
+ISlide.Map = function() {
+  this.dict = new Array();
+}
+
+ISlide.Map.KEY = 0;
+ISlide.Map.VALUE = 1;
+
+ISlide.Map.prototype.put = function(key, value) {
+  if(value==null) {
+    value = true;
+  }
+  var i = this._find(key);
+  if(i==null) {
+    this.dict.push([key,value]);
+  } else {
+    this.dict[i][ISlide.Map.VALUE] = value;
+  }
+};
+
+ISlide.Map.prototype.get = function(key) {
+  var i = this._find(key);
+  if(i==null) {
+    return null;
+  }
+
+  return this.dict[i][1];
+};
+
+ISlide.Map.prototype.keys = function() {
+  var list = new Array();
+  for(var i=0; i<this.dict.length; i++) {
+    list.push(this.dict[i][ISlide.Map.KEY])
+  }
+  return list;
+};
+
+ISlide.Map.prototype.values = function() {
+  var list = new Array();
+  for(var i=0; i<this.dict.length; i++) {
+    list.push(this.dict[i][ISlide.Map.VALUE])
+  }
+  return list;
+};
+
+ISlide.Map.prototype._find = function(key) {
+  for(var i=0; i<this.dict.length; i++) {
+    if( this.dict[i][ISlide.Map.KEY]==key ) {
+      return i;
+    }
+  }
+  return null;
+}
