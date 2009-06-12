@@ -26,6 +26,9 @@
  * Please see the top level README for additional credits and information.
  */
 
+// Overide the default logging
+MESSAGES = new SpoolingConsole(Log.ERROR);
+
 var SLIDE_IMAGE_1 = "slide/IMG1.jpg";
 var ORIGINAL_IMAGE_1 = "original/IMG1.jpg";
 var THUMBNAIL_IMAGE_1 = "thumbnail/IMG1.jpg";
@@ -88,4 +91,28 @@ function testMoveBeforeTheFirstImage() {
 
   var image2 = album.previousImage();
   assertNull(image2);
+}
+
+/*
+ * Image tests
+ */
+function testTagImage() {
+  var album = createAlbumWithOneImage();
+  var image = album.nextImage();
+  image.tag("Cool");
+  image.tag("Winter in France");
+
+  //var tags = image.tags();
+  //assertEquals(tags[0], "Cool");
+  //assertEquals(tags[1], "Winter in France");
+}
+
+//
+// Display any messages captured at the
+// end of the test
+//
+function testShowMessages() {
+  if(MESSAGES.contents.length > 0) {
+    alert(MESSAGES.contents);
+  }
 }

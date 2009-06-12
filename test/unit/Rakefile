@@ -11,7 +11,7 @@ require "#{File.join(File.dirname(__FILE__), "..", "test_helper.rb")}"
 # Note: setupTest.html can be used to ensure that
 #       the environment is setup correctly.
 #
-UNIT_TESTS=['thumbnail.html']
+UNIT_TESTS=['util.html', 'thumbnail.html']
 
 # Used to create relative URLS.
 UNIT_TESTBASE = File.join(".", "..", "..", "unit")

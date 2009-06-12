@@ -22,26 +22,8 @@
 * THE SOFTWARE.
 */
 
-/**
- * Please see the top level README for additional credits and information.
- */
-
-function trace(msg){
-  //alert(msg);
-}
-
-function debug(msg){
-  //alert(msg);
-}
-
-function info(msg){
-  //alert(msg);
-}
-
-function error(msg){
-  //alert(msg);
-}
-
+// Default level
+var MESSAGES = new SpoolingConsole(Log.INFO);
 
 /*
  * An image normally containted within
@@ -53,7 +35,13 @@ function Image(original, slide, thumbnail) {
   this.originalURL = original;
   this.slideURL = slide;
   this.thumbnailURL = thumbnail;
+  this.tags = {};
+  this.l = new Log('Image', MESSAGES.console());
 }
+
+Image.prototype.tag = function(new_tag) {
+  this.tags[new_tag] = true;
+};
 
 /*
  * Album or group of images
@@ -62,14 +50,16 @@ function Album() {
   this.START = -1;
   this.currentImage = this.START;
   this.images = [];
+  this.l = new Log('Album', MESSAGES.console());
 }
 
 Album.prototype.addImage = function(original, slide, thumbnail) {
+  this.l.trace("Adding image: " + original);
   this.images.push(new Image(original, slide, thumbnail));
 };
 
 Album.prototype.nextImage = function() {
-  debug("Images in array: " + this.images.length +
+  this.l.debug("Images in array: " + this.images.length +
     " current image:" + this.currentImage);
 
   if( this.images.length==0 ){
@@ -78,16 +68,16 @@ Album.prototype.nextImage = function() {
 
   this.currentImage = this.currentImage + 1;
   if( this.currentImage >= this.images.length ){
-    trace("Returning image:" + "null");
+    this.l.trace("Returning image:" + "null");
     return null;
   }
 
-  trace("Returning image:" + this.currentImage);
+  this.l.trace("Returning image:" + this.currentImage);
   return this.images[this.currentImage];
 };
 
 Album.prototype.previousImage = function() {
-  debug("Images in array: " + this.images.length +
+  this.l.debug("Images in array: " + this.images.length +
     " current image:" + this.currentImage);
 
   if( this.images.length==0 ){
@@ -96,11 +86,10 @@ Album.prototype.previousImage = function() {
 
   this.currentImage = this.currentImage - 1;
   if( this.currentImage <= this.START ){
-    trace("Returning image:" + "null");
+    this.l.trace("Returning image:" + "null");
     return null;
   }
 
-  trace("Returning image:" + this.currentImage);
+  this.l.trace("Returning image:" + this.currentImage);
   return this.images[this.currentImage];
 };
-
