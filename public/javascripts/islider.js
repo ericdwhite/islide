@@ -35,13 +35,17 @@ function Image(original, slide, thumbnail) {
   this.originalURL = original;
   this.slideURL = slide;
   this.thumbnailURL = thumbnail;
-  this.tags = {};
+  this.tags = new ISlide.Map();
   this.l = new Log('Image', MESSAGES.console());
 }
 
 Image.prototype.tag = function(new_tag) {
-  this.tags[new_tag] = true;
+  this.tags.put(new_tag, true);
 };
+
+Image.prototype.sorted_tags = function() {
+  return this.tags.keys().sort();
+}
 
 /*
  * Album or group of images

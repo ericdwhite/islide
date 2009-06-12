@@ -99,12 +99,12 @@ function testMoveBeforeTheFirstImage() {
 function testTagImage() {
   var album = createAlbumWithOneImage();
   var image = album.nextImage();
-  image.tag("Cool");
   image.tag("Winter in France");
+  image.tag("Cool");
 
-  //var tags = image.tags();
-  //assertEquals(tags[0], "Cool");
-  //assertEquals(tags[1], "Winter in France");
+  var tags = image.sorted_tags();
+  assertEquals("Cool", tags[0]);
+  assertEquals("Winter in France", tags[1]);
 }
 
 //
