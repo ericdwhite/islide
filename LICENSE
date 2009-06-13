@@ -42,3 +42,6 @@ Functional 1.0.2
 
 JSON2JS -- http://www.json.org/json2.js
   see: islide/public/javascripts/json2.js
+
+jQuery 1.3.2 -- http://jquery.com/
+  see: islide/public/javascripts/jquery-1.3.2.min.js
