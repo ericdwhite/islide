@@ -39,3 +39,6 @@ JsUnit 2.2alpha
 
 Functional 1.0.2
   see: islide/test/javascripts/functional-1.0.2-MIT-LICENSE
+
+JSON2JS -- http://www.json.org/json2.js
+  see: islide/public/javascripts/json2.js
