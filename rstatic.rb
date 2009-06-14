@@ -19,6 +19,7 @@ puts ">>> Serving: #{root}"
 # A list of regular expressions which if
 # matched will be cached by the browser.
 #
+#ALLOWED_FOR_CACHING=[]
 ALLOWED_FOR_CACHING=[/test\/javascripts/]
 
 class NonCachingFile < Rack::File
