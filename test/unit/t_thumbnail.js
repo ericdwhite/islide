@@ -27,8 +27,10 @@
  */
 
 // Overide the default logging
-MESSAGES = new SpoolingConsole(Log.ERROR);
+var MESSAGES = null; // Setup in the JsUnit setUp
 
+var UUID_IMAGE_1 = "054901a0-3a56-012c-e7c7-00112436d9cc";
+var NAME_IMAGE_1 = "IMG1";
 var SLIDE_IMAGE_1 = "slide/IMG1.jpg";
 var ORIGINAL_IMAGE_1 = "original/IMG1.jpg";
 var THUMBNAIL_IMAGE_1 = "thumbnail/IMG1.jpg";
@@ -38,7 +40,8 @@ var THUMBNAIL_IMAGE_1 = "thumbnail/IMG1.jpg";
  */
 function createAlbumWithOneImage() {
   var album = new Album();
-  album.addImage(ORIGINAL_IMAGE_1, SLIDE_IMAGE_1, THUMBNAIL_IMAGE_1);
+  album.name = "Basic-Test-Album";
+  album.addImage(UUID_IMAGE_1, NAME_IMAGE_1, ORIGINAL_IMAGE_1, SLIDE_IMAGE_1, THUMBNAIL_IMAGE_1);
   return album;
 }
 
@@ -99,20 +102,110 @@ function testMoveBeforeTheFirstImage() {
 function testTagImage() {
   var album = createAlbumWithOneImage();
   var image = album.nextImage();
-  image.tag("Winter in France");
-  image.tag("Cool");
+  image.tagWith("Winter in France");
+  image.tagWith("Cool");
 
-  var tags = image.sorted_tags();
+  var tags = image.sortedTags();
   assertEquals("Cool", tags[0]);
   assertEquals("Winter in France", tags[1]);
+}
+
+/*
+ * JSONAlbumParser tests
+ */
+var test_album = "{" +
+  '"name": "2007/cote-dazur",' +
+  '"tags": [' +
+  '  "Cote D\'Azur", "summer", "France"' +
+  '  ],' +
+  '"images": [' +
+  '  {' +
+  '    "id": "054901a0-3a56-012c-e7c7-00112436d9cc",' +
+  '    "name": "IMG_7275",' +
+  '    "org": "2007/cote-dazur/IMG_7275.JPG",' +
+  '    "slide": "2007/cote-dazur/slides/IMG_7275.JPG",' +
+  '    "thumb": "2007/cote-dazur/thumbs/IMG_7275.JPG",' +
+  '    "tags": [' +
+  '        "First Image", "Nature"' +
+  '      ],' +
+  '  },' +
+  '  {' +
+  '    "id": "05492e70-3a56-012c-e7c8-00112436d9cc",' +
+  '    "name": "IMG_7276",' +
+  '    "org": "2007/cote-dazur/IMG_7276.JPG",' +
+  '    "slide": "2007/cote-dazur/slides/IMG_7276.JPG",' +
+  '    "thumb": "2007/cote-dazur/thumbs/IMG_7276.JPG"' +
+  '  }' +
+  ']' +
+'}';
+function testJSONAlbumParse() {
+  var parser = new JSONAlbumParser();
+  var album = parser.parse(test_album);
+  assertEquals("2007/cote-dazur", album.name);
+  assertEquals(2, album.images.length);
+
+  var image1 = album.nextImage();
+  //
+  // Verify everything on image 1
+  assertEquals("054901a0-3a56-012c-e7c7-00112436d9cc", image1.id);
+  assertEquals("IMG_7275", image1.name);
+  assertEquals("2007/cote-dazur/IMG_7275.JPG", image1.originalURL);
+  assertEquals("2007/cote-dazur/slides/IMG_7275.JPG", image1.slideURL);
+  assertEquals("2007/cote-dazur/thumbs/IMG_7275.JPG", image1.thumbnailURL);
+  compareArray(["First Image", "Nature"], image1.sortedTags());
+
+  // Verify the tags as they should be an empty list on image2
+  var image2 = album.nextImage();
+  compareArray([], image2.sortedTags());
+}
+
+function testJSONAblumParserWithEmptyAlbum() {
+  var json = "{" +
+    '"name": "2007/cote-dazur"' +
+    '}';
+  var album = new JSONAlbumParser().parse(json);
+  assertEquals("2007/cote-dazur", album.name);
+  assertEquals(0, album.images.length);
+}
+
+//
+// These JsUnit methods are used to capture
+// the log messages and display them to the
+// console log which was added to the JsUnit
+// source.
+//
+function setUp() {
+  MESSAGES = new SpoolingConsole(Log.TRACE);
+}
+
+function tearDown() {
+  showMessages(top.testManager._testFunctionName);
 }
 
 //
 // Display any messages captured at the
 // end of the test
 //
-function testShowMessages() {
+function showMessages(test) {
   if(MESSAGES.contents.length > 0) {
-    alert(MESSAGES.contents);
+    var main_document = top.$("frame")[0].contentWindow.document;
+    var console = $("#consoleLog", main_document)[0].contentWindow.document;
+    var messages = $("#console_text", console);
+    messages.append("\n"+test+"\n---\n"+MESSAGES.contents);
+  }
+}
+
+/*
+ * Test Utilities (TODO Refactor into a common Test Utilities JS)
+ */
+function compareArray(expected, actual) {
+  if(expected==null & actual==null ) {
+    return;
+  }
+  assertNotNull(expected);
+  assertNotNull(actual);
+  assertEquals(expected.length, actual.length);
+  for(var i=0; i<expected.length; i++) {
+    assertEquals(expected[i], actual[i]);
   }
 }
