@@ -1,0 +1,10 @@
+This is a version of the JsUnit mainline with the 'java' directory removed.
+
+https://jsunit.svn.sourceforge.net/svnroot/jsunit/trunk/jsunit REV 1335
+
+It also has the patch 'JsUnit-FireBug.patch' applied to it.
+  See: islide/test/javascripts/JsUnit-FireBug.patch
+
+It also has a consoleLog windows added as a place to dump messages to. 
+  See: islide/test/javascripts/JsUnit-Console.patch
+       islide/test/javascripts/jsunit/app/console-log.html 

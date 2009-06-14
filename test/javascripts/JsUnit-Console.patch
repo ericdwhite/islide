@@ -1,0 +1,31 @@
+diff --git a/app/main-frame.html b/app/main-frame.html
+index 7c6c54c..4c3cb1d 100644
+--- a/app/main-frame.html
++++ b/app/main-frame.html
+@@ -3,6 +3,7 @@
+ <head>
+     <title>jsUnit Main Frame</title>
+ </head>
++<frameset id="split" cols="70%, 30%">
+ <frameset rows="260,30,30,30,*" border="0">>
+     <frame name="mainData" src="main-data.html" scrolling="no" frameborder="0">
+     <frame name="mainStatus" src="main-status.html" scrolling="no" frameborder="0">
+@@ -15,4 +16,6 @@
+         </body>
+     </noframes>
+ </frameset>
++<frame id="consoleLog" name="consoleLog" src="console-log.html" scrolling="yes" frameborder="5">
++</frameset>
+ </html>
+diff --git a/testRunner.html b/testRunner.html
+index 1af19e0..2d3ed40 100644
+--- a/testRunner.html
++++ b/testRunner.html
+@@ -4,6 +4,7 @@
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>JsUnit Test Runner</title>
++<script type="text/javascript" src="../../../public/javascripts/jquery.js"></script>
+ <script language="JavaScript" type="text/javascript" src="app/jsUnitCore.js"></script>
+ <script language="JavaScript" type="text/javascript" src="app/jsUnitTestManager.js"></script>
+ <script language="JavaScript" type="text/javascript" src="app/BaseUiManager.js"></script>

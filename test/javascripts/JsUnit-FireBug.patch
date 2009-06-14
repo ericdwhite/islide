@@ -1,0 +1,26 @@
+diff  a/jsunit/app/jsUnitCore.js b/jsunit/app/jsUnitCore.js
+--- a/jsunit/app/jsUnitCore.js
++++ b/jsunit/app/jsUnitCore.js
+@@ -889,7 +889,8 @@ JsUnit.Util.getStackTrace = function() {
+         // fake an exception so we can get Mozilla's error stack
+         try
+         {
+-            foo.bar;
++            var stackTrace = new TypeError("Assert stack trace");
++            throw stackTrace;
+         }
+         catch(exception)
+         {
+diff  a/jsunit/app/jsUnitTestManager.js b/jsunit/app/jsUnitTestManager.js
+--- a/jsunit/app/jsUnitTestManager.js
++++ b/jsunit/app/jsUnitTestManager.js
+@@ -436,7 +436,9 @@ JsUnitTestManager.prototype.abort = function () {
+ JsUnitTestManager.prototype.getTimeout = function () {
+     var result = JsUnitTestManager.TESTPAGE_WAIT_SEC;
+     try {
++      if( this.timeout ) {
+         result = eval(this.timeout.value);
++      }
+     }
+     catch (e) {
+     }
